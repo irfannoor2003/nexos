@@ -1,0 +1,20 @@
+Options -Indexes
+RewriteEngine On
+
+# Remove trailing slashes (except root)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Clean blog post URLs: /blog/{slug} → /blog/index.php?slug={slug}
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/([a-z0-9\-]+)/?$ /blog/index.php?slug=$1 [L,QSA]
+
+# Security: block direct access to includes
+RewriteRule ^includes/ - [F,L]
+
+# Security: block .php in uploads
+RewriteRule ^uploads/.*\.php$ - [F,L]
+
+# Security: block .php in assets
+RewriteRule ^assets/.*\.php$ - [F,L]
