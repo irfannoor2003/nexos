@@ -8,6 +8,8 @@ $activePage = $activePage ?? 'home';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?=h($pageTitle)?></title>
+  <link rel="icon" type="image/x-icon" href="<?= site_img('favicon', '/assets/images/favicon.ico') ?>">
+  <link rel="apple-touch-icon" href="<?= site_img('favicon', '/assets/images/favicon.ico') ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
@@ -224,6 +226,11 @@ $activePage = $activePage ?? 'home';
        SECTION COMMONS
        ═══════════════════════════════════════════════════ */
     .sec{position:relative;padding:110px 64px}
+    .badge-dot{
+      width:6px;height:6px;
+      background:var(--sub);border-radius:50%;
+      animation:pulse 1.4s infinite;display:inline-block;
+    }
     .sec-label{
       display:inline-flex;align-items:center;gap:8px;
       padding:7px 18px;border-radius:100px;
@@ -316,6 +323,9 @@ $activePage = $activePage ?? 'home';
     .page-breadcrumb a{color:var(--sub);transition:color .2s}
     .page-breadcrumb a:hover{color:var(--blue2)}
     .page-breadcrumb span{color:rgba(100,100,120,.4)}
+    .svc-card-icon{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--border);margin-bottom:16px;transition:all .35s var(--spring)}
+    .svc-card-icon svg{width:24px;height:24px;color:var(--blue2)}
+    .card:hover .svc-card-icon{background:rgba(255,255,255,.06);transform:scale(1.12) rotate(-4deg)}
 
     /* ═══════════════════════════════════════════════════
        FOOTER
@@ -387,6 +397,11 @@ $activePage = $activePage ?? 'home';
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     @keyframes scaleUp{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
     @keyframes glowRotate{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+    @keyframes growHeight{0%{height:0}100%{height:var(--target-height)}}
+    @keyframes dashFlow{0%{stroke-dashoffset:200}100%{stroke-dashoffset:0}}
+    @keyframes drawLine{0%{stroke-dashoffset:350}to{stroke-dashoffset:0}}
+    @keyframes slideIn{0%{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
     /* ── PREMIUM PAGE LOAD ── */
     .page-loader{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .3s,visibility .3s}

@@ -69,12 +69,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Fetch all images ──
+// ── Ensure managed image slots exist for global + service detail pages ──
 $db = getDB();
+$requiredImages = [
+    ['favicon', 'Favicon / Browser Icon', '/assets/images/favicon.ico', 'Global'],
+    ['svc_brand_detail', 'Brand Detail Hero Image', '/assets/images/svc-brand.jpg', 'Services'],
+    ['svc_marketing_detail', 'Digital Marketing Detail Hero Image', '/assets/images/svc-social.jpg', 'Services'],
+    ['svc_web_detail', 'Web Design Detail Hero Image', '/assets/images/svc-web.jpg', 'Services'],
+    ['svc_seo_detail', 'SEO Detail Hero Image', '/assets/images/svc-seo.jpg', 'Services'],
+    ['svc_ads_detail', 'Ads Detail Hero Image', '/assets/images/svc-ads.jpg', 'Services'],
+    ['svc_ecom_detail', 'E-Commerce Detail Hero Image', '/assets/images/svc-ecom.jpg', 'Services'],
+    ['svc_perf_detail', 'Performance Marketing Detail Hero Image', '/assets/images/svc-perf.jpg', 'Services'],
+    ['svc_ai_detail', 'AI Automation Detail Hero Image', '/assets/images/svc-ai.jpg', 'Services'],
+];
+foreach ($requiredImages as $slot) {
+    $stmt = $db->prepare("SELECT id FROM page_images WHERE image_key = ? LIMIT 1");
+    $stmt->execute([$slot[0]]);
+    if (!$stmt->fetch()) {
+        $db->prepare("INSERT INTO page_images (image_key, label, default_path, page_section) VALUES (?, ?, ?, ?)")
+           ->execute($slot);
+    }
+}
+
+// ── Fetch all images ──
 $allImages = $db->query("SELECT * FROM page_images ORDER BY page_section, id")->fetchAll(PDO::FETCH_ASSOC);
 $grouped = [];
 foreach ($allImages as $img) {
-    $grouped[$img['page_section']][] = $img;
+    $sectionKey = $img['page_section'];
+    if ($sectionKey === 'Services' && str_contains((string)$img['image_key'], 'detail')) {
+        $sectionKey = 'Service Detail Images';
+    }
+    $grouped[$sectionKey][] = $img;
 }
 
 include __DIR__ . '/partials/layout_head.php';

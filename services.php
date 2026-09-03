@@ -155,6 +155,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['On-Page SEO','Technical SEO','Link Building','Local SEO','Content Strategy'],
         'icon'=>'<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3c-3 3.5-3 9.5 0 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3c3 3.5 3 9.5 0 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
         'image'=>site_img('svc_seo','/assets/images/svc-seo.jpg'),
+        'detail_link'=>'/seo.php',
       ],
       [
         'id'=>'ads','num'=>'02','title'=>'Digital Advertising (Meta & Google)','reverse'=>true,
@@ -163,6 +164,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['Meta Ads','Google Ads','Retargeting','Lead Generation','ROI Tracking'],
         'icon'=>'<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 9h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 15h4M14 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
         'image'=>site_img('svc_ads','/assets/images/svc-ads.jpg'),
+        'detail_link'=>'/digital-advertising.php',
       ],
       [
         'id'=>'ecom','num'=>'03','title'=>'E-Commerce Solutions','reverse'=>false,
@@ -171,6 +173,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['Shopify','WooCommerce','Amazon','Marketplace SEO','CRO'],
         'icon'=>'<path d="M6 2L3 7v13a2 2 0 002 2h14a2 2 0 002-2V7l-3-5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 11a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
         'image'=>site_img('svc_ecom','/assets/images/svc-ecom.jpg'),
+        'detail_link'=>'/e-commerce-solutions.php',
       ],
       [
         'id'=>'web','num'=>'04','title'=>'Web Design & Development','reverse'=>true,
@@ -179,6 +182,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['Web Design','WordPress','Custom Dev','Landing Pages','UI/UX'],
         'icon'=>'<rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
         'image'=>site_img('svc_web','/assets/images/svc-web.jpg'),
+        'detail_link'=>'/web-design-development.php',
       ],
       [
         'id'=>'perf','num'=>'05','title'=>'Performance Marketing','reverse'=>false,
@@ -187,6 +191,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['Performance Ads','Video Creative','UGC','Attribution','Scaling'],
         'icon'=>'<rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 17l5-6 4 4 4-5 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
         'image'=>site_img('svc_perf','/assets/images/svc-perf.jpg'),
+        'detail_link'=>'/performance-marketing.php',
       ],
       [
         'id'=>'ai','num'=>'06','title'=>'AI Automation','reverse'=>true,
@@ -195,6 +200,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['AI Chatbots','Workflow Automation','CRM Automation','Lead Nurturing','Zapier/Make'],
         'icon'=>'<rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.4"/><circle cx="15" cy="9" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M7 15c1 1.5 5 1.5 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
         'image'=>site_img('svc_ai','/assets/images/svc-ai.jpg'),
+        'detail_link'=>'/ai-automation.php',
       ],
       [
         'id'=>'brand','num'=>'07','title'=>'Brand Strategy & Identity','reverse'=>false,
@@ -203,6 +209,7 @@ include __DIR__ . '/includes/header.php';
         'tags'=>['Brand Identity','Logo Design','Messaging','Social Branding','Pitch Decks'],
         'icon'=>'<circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 12v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
         'image'=>site_img('svc_brand','/assets/images/svc-brand.jpg'),
+        'detail_link'=>'/branding.php',
       ],
     ];
     foreach($services as $si=>$svc):?>
@@ -226,7 +233,9 @@ include __DIR__ . '/includes/header.php';
           <span class="svc-tag"><?=h($tag)?></span>
           <?php endforeach;?>
         </div>
-        <div style="margin-top:36px"><a href="/contact.php" class="btn-primary">Get Started &rarr;</a></div>
+        <div style="margin-top:36px">
+          <a href="<?= !empty($svc['detail_link']) ? $svc['detail_link'] : '/contact.php'; ?>" class="btn-primary">Get Started &rarr;</a>
+        </div>
       </div>
       <div class="svc-full-vis">
         <div class="svc-full-visual">

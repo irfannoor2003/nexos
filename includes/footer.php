@@ -124,9 +124,13 @@ gsap.registerPlugin(ScrollTrigger);
 var revealEls=document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
 revealEls.forEach(function(el,idx){
   var dir=el.classList.contains('reveal-l')?-1:el.classList.contains('reveal-r')?1:0;
-  /* Cap stagger at 300ms max - prevents elements deep in page having absurd delays */
   var delay=+(el.dataset.delay)||Math.min(idx*60,300);
   gsap.fromTo(el,{opacity:0,y:dir===0?30:0,x:dir?dir*40:0},{opacity:1,y:0,x:0,duration:.75,delay:delay/1000,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%',toggleActions:'play none none none'},onUpdate:function(){el.dataset.gsap=el.style.transform||''}});
+});
+
+gsap.utils.toArray('.detail-media,.detail-card,.detail-stat,.process-card,.service-item,.quote-box,.benefit-box,.cta-panel,.card').forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  gsap.to(el,{yPercent:-6, ease:'none', scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}});
 });
 
 /* MAGNETIC BUTTONS - Premium smooth follow */
@@ -149,7 +153,7 @@ for(var m=0;m<magBtns.length;m++){
 }
 
 /* 3D TILT EFFECT - pauses while scrolling to prevent jitter */
-var tiltCards=document.querySelectorAll('.svc-card,.testi-card,.price-card,.team-card,.val-card,.ind-card,.process-card,.blog-card,.stat-box,.mission-card,.why-card,.faq-card,.port-grid-card');
+var tiltCards=document.querySelectorAll('.svc-card,.testi-card,.price-card,.team-card,.val-card,.ind-card,.process-card,.blog-card,.stat-box,.mission-card,.why-card,.faq-card,.port-grid-card,.detail-card,.detail-stat,.service-item,.card,.quote-box,.benefit-box,.cta-panel,.detail-media');
 var tiltScrolling=false, tiltTimer;
 window.addEventListener('scroll',function(){
   tiltScrolling=true;
