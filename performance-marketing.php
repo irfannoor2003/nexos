@@ -32,11 +32,11 @@ include __DIR__ . '/includes/header.php';
   .detail-media::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 45%);z-index:2;pointer-events:none}
   .detail-media:hover{box-shadow:0 30px 80px rgba(21,101,255,.12)}
   .detail-media img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.08);transform:scale(1.03)}
-  .detail-media .floating-panel{position:absolute;right:20px;bottom:20px;z-index:3;background:rgba(12,12,20,.82);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:18px;padding:18px 20px;min-width:180px;box-shadow:var(--shadow-md);transform:translateZ(30px)}
+  .detail-media .floating-panel{position:absolute;right:20px;bottom:20px;z-index:3;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:18px;padding:18px 20px;min-width:180px;box-shadow:var(--shadow-md);transform:translateZ(30px)}
   .floating-panel .kicker{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--sub);display:block;margin-bottom:8px}
   .floating-panel strong{font-size:26px;font-family:var(--font-h)}
   .detail-media .mini-orb{position:absolute;left:20px;top:20px;width:86px;height:86px;border-radius:50%;background:radial-gradient(circle,rgba(21,101,255,.36),transparent 68%);filter:blur(12px);z-index:1;animation:pulseOrb 5s ease-in-out infinite}
-  .detail-media .svg-orbit{position:absolute;inset:auto 28px 26px auto;z-index:4;display:grid;place-items:center;width:120px;height:120px;border-radius:50%;background:rgba(15,17,27,.7);border:1px solid var(--border);box-shadow:var(--shadow-md);transform:translateZ(50px)}
+  .detail-media .svg-orbit{position:absolute;inset:auto 28px 26px auto;z-index:4;display:grid;place-items:center;width:120px;height:120px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);box-shadow:var(--shadow-md);transform:translateZ(50px)}
   .detail-media .svg-orbit svg{width:52px;height:52px;color:var(--blue2)}
   .detail-card,.process-card,.service-item,.quote-box,.check-grid,.stats,.cta-panel{transform-style:preserve-3d;transition:transform .35s var(--spring),box-shadow .35s var(--spring),border-color .35s ease}
   .detail-card:hover,.process-card:hover,.service-item:hover,.quote-box:hover,.check-grid:hover,.stats:hover,.cta-panel:hover{transform:translateY(-6px) translateZ(0)}
@@ -172,5 +172,41 @@ include __DIR__ . '/includes/header.php';
     </div>
   </section>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+
+  // Process cards stagger
+  gsap.utils.toArray('.process-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:50,scale:.95,duration:.9,delay:i*.12,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+
+  // Service list items
+  gsap.utils.toArray('.service-item').forEach(function(item,i){
+    gsap.from(item,{
+      opacity:0,y:40,duration:.8,delay:i*.1,ease:'power3.out',
+      scrollTrigger:{trigger:item,start:'top 88%'}
+    });
+  });
+
+  // Stats
+  gsap.utils.toArray('.detail-section .stat').forEach(function(s,i){
+    gsap.from(s,{
+      opacity:0,y:30,scale:.9,duration:.6,delay:i*.1,ease:'back.out(1.5)',
+      scrollTrigger:{trigger:s,start:'top 88%'}
+    });
+  });
+
+  // CTA panel
+  gsap.from('.cta-panel',{
+    opacity:0,y:60,scale:.95,duration:1.1,ease:'power4.out',
+    scrollTrigger:{trigger:'.cta-panel',start:'top 85%'}
+  });
+});
+</script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/helpers.php';
+require_once __DIR__ . '/../includes/image_slots.php';
 require_once __DIR__ . '/../includes/db.php';
 requireLogin();
 $adminTitle  = 'Image Manager | Admin';
@@ -69,19 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Ensure managed image slots exist for global + service detail pages ──
+// ── Ensure all managed image slots exist (single source of truth) ──
 $db = getDB();
-$requiredImages = [
-    ['favicon', 'Favicon / Browser Icon', '/assets/images/favicon.ico', 'Global'],
-    ['svc_brand_detail', 'Brand Detail Hero Image', '/assets/images/svc-brand.jpg', 'Services'],
-    ['svc_marketing_detail', 'Digital Marketing Detail Hero Image', '/assets/images/svc-social.jpg', 'Services'],
-    ['svc_web_detail', 'Web Design Detail Hero Image', '/assets/images/svc-web.jpg', 'Services'],
-    ['svc_seo_detail', 'SEO Detail Hero Image', '/assets/images/svc-seo.jpg', 'Services'],
-    ['svc_ads_detail', 'Ads Detail Hero Image', '/assets/images/svc-ads.jpg', 'Services'],
-    ['svc_ecom_detail', 'E-Commerce Detail Hero Image', '/assets/images/svc-ecom.jpg', 'Services'],
-    ['svc_perf_detail', 'Performance Marketing Detail Hero Image', '/assets/images/svc-perf.jpg', 'Services'],
-    ['svc_ai_detail', 'AI Automation Detail Hero Image', '/assets/images/svc-ai.jpg', 'Services'],
-];
+$requiredImages = nexus_image_slots();
 foreach ($requiredImages as $slot) {
     $stmt = $db->prepare("SELECT id FROM page_images WHERE image_key = ? LIMIT 1");
     $stmt->execute([$slot[0]]);
@@ -108,7 +99,7 @@ include __DIR__ . '/partials/layout_head.php';
 <style>
 .img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
 .img-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .2s}
-.img-card:hover{border-color:rgba(255,255,255,.12)}
+.img-card:hover{border-color:rgba(21,101,255,.25)}
 .img-preview{width:100%;height:180px;overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center}
 .img-preview img{width:100%;height:100%;object-fit:cover}
 .img-preview .no-img{font-size:12px;color:var(--sub);opacity:.4}

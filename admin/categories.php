@@ -67,7 +67,7 @@ $adminTitle = 'Categories';
 require 'partials/layout_head.php';
 ?>
 
-<div style="display:grid;grid-template-columns:1fr 340px;gap:24px;max-width:900px">
+<div class="admin-grid">
 
   <!-- Categories Table -->
   <div>

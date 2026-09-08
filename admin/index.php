@@ -30,8 +30,9 @@ include __DIR__ . '/partials/layout_head.php';
 .msg-av{width:36px;height:36px;background:rgba(21,101,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:12px;font-weight:700;color:var(--blue2);flex-shrink:0}
 .msg-name{font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-h)}
 .msg-preview{font-size:12px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
-.msg-time{font-size:11px;color:rgba(200,210,240,.3);margin-left:auto;flex-shrink:0}
+.msg-time{font-size:11px;color:rgba(15,23,42,.38);margin-left:auto;flex-shrink:0}
 .unread-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;flex-shrink:0;margin-top:6px}
+@media(max-width:900px){.dash-grid{grid-template-columns:1fr}}
 </style>
 
 <!-- Quick stats -->
@@ -75,7 +76,7 @@ include __DIR__ . '/partials/layout_head.php';
       <a href="/admin/posts.php" class="btn-outline btn-sm">View All</a>
     </div>
     <?php foreach($recentPosts as $p): ?>
-    <div style="display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.03)">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid rgba(15,23,42,.05)">
       <div style="flex:1;min-width:0">
         <div style="font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-h);white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= h($p['title']) ?></div>
         <div style="font-size:11px;color:var(--sub);margin-top:2px"><?= date('M j, Y', strtotime($p['created_at'])) ?> · <?= $p['views'] ?> views</div>

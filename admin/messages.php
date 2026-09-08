@@ -67,12 +67,13 @@ require 'partials/layout_head.php';
 .msg-item.unread .msg-item-name::before{content:'';display:inline-block;width:7px;height:7px;background:var(--blue);border-radius:50%;margin-right:7px;vertical-align:middle}
 .msg-item-name{font-family:var(--font-h);font-size:13px;font-weight:600;color:var(--text)}
 .msg-item-sub{font-size:11.5px;color:var(--sub);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.msg-item-time{font-size:10.5px;color:rgba(200,210,240,.3);margin-top:4px}
+.msg-item-time{font-size:10.5px;color:rgba(15,23,42,.38);margin-top:4px}
 .msg-detail{padding:32px;flex:1}
 .msg-detail-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--sub);font-size:14px}
 .filter-tabs{display:flex;gap:6px;margin-bottom:20px}
 .filter-tab{padding:7px 16px;border-radius:8px;font-family:var(--font-h);font-size:12px;font-weight:600;color:var(--sub);background:var(--card);border:1px solid var(--border);transition:all .2s}
 .filter-tab.active,.filter-tab:hover{background:rgba(21,101,255,.12);color:var(--blue2);border-color:rgba(21,101,255,.2)}
+@media(max-width:900px){.msg-layout{grid-template-columns:1fr}.msg-list{max-height:40vh;border-right:none;border-bottom:1px solid var(--border)}.msg-detail{padding:20px}}
 </style>
 
 <div style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
@@ -114,7 +115,7 @@ require 'partials/layout_head.php';
         <div>
           <div style="font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px"><?= h($view['name']) ?></div>
           <div style="font-size:13px;color:var(--sub)"><?= h($view['email']) ?><?= $view['phone'] ? ' · ' . h($view['phone']) : '' ?></div>
-          <div style="font-size:11px;color:rgba(200,210,240,.35);margin-top:4px"><?= date('D, M j Y · g:i A', strtotime($view['created_at'])) ?></div>
+          <div style="font-size:11px;color:rgba(15,23,42,.42);margin-top:4px"><?= date('D, M j Y · g:i A', strtotime($view['created_at'])) ?></div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <a href="mailto:<?= h($view['email']) ?>" class="btn-primary btn-sm">Reply via Email</a>
@@ -143,7 +144,7 @@ require 'partials/layout_head.php';
       <?php endif; ?>
 
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:22px">
-        <div style="font-size:14px;color:rgba(200,210,240,.85);line-height:1.85;white-space:pre-wrap"><?= h($view['message']) ?></div>
+        <div style="font-size:14px;color:rgba(15,23,42,.85);line-height:1.85;white-space:pre-wrap"><?= h($view['message']) ?></div>
       </div>
 
     <?php else: ?>

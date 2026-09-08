@@ -268,21 +268,23 @@ include __DIR__ . '/includes/header.php';
 .frust-text{font-size:14px;font-weight:500;color:var(--sub)}
 
 /* ═══════════════════════════════════════════════════
-   SERVICES GRID
+   SERVICES BENTO GRID
    ═══════════════════════════════════════════════════ */
 .svc-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--border-accent);
+  gap:24px;
   margin-top:76px;
-  border:1px solid var(--border-accent);
-  border-radius:var(--r-xl);overflow:hidden;
 }
 .svc-card{
   background:var(--card);padding:44px 36px;
   position:relative;overflow:hidden;
   transition:background .5s,transform .6s var(--spring),box-shadow .5s;
   cursor:default;transform-style:preserve-3d;
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
 }
+.svc-card:nth-child(1) { grid-column: span 2; background: linear-gradient(135deg, var(--card), var(--bg3)); }
+.svc-card:nth-child(4) { grid-column: span 2; background: linear-gradient(135deg, var(--bg3), var(--card)); }
 .svc-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:var(--border);
@@ -315,33 +317,64 @@ include __DIR__ . '/includes/header.php';
   transform:rotate(45deg);
 }
 
+/* svc-card is now a link — reset anchor defaults + add "Read More" */
+.svc-card{
+  text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+}
+.svc-card .svc-title{color:var(--text)}
+.svc-read-more{
+  margin-top:auto;padding-top:24px;
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--blue2);font-family:var(--font-b);
+  font-size:13px;font-weight:600;letter-spacing:.3px;
+  transition:gap .3s var(--spring),color .3s;
+}
+.svc-card:hover .svc-read-more{color:var(--blue);gap:12px}
+.svc-arrow-xs{font-size:15px;line-height:1}
+
 /* ═══════════════════════════════════════════════════
-   INDUSTRIES - SLIDER
+   INDUSTRIES - AUTO-SCROLL MARQUEE
    ═══════════════════════════════════════════════════ */
-.ind-slider-wrap{position:relative;margin-top:66px}
-.ind-slider{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 4px 16px;scrollbar-width:none;-ms-overflow-style:none}
-.ind-slider::-webkit-scrollbar{display:none}
+.ind-slider-wrap{
+  position:relative;margin-top:66px;
+  overflow:hidden;
+  /* Fade edges */
+  mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+}
+.ind-slider{
+  display:flex;gap:20px;
+  width:max-content;
+  animation:indScroll 45s linear infinite;
+}
+.ind-slider:hover{animation-play-state:paused}
+@keyframes indScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ind-card{
-  flex:0 0 150px;scroll-snap-align:start;
+  width:170px;flex-shrink:0;
   background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);
-  padding:28px 12px;display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:14px;
   transition:all .4s var(--spring);cursor:default;
 }
-.ind-card:hover{border-color:var(--border);background:var(--bg3);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.ind-card:hover{border-color:var(--blue);background:var(--bg3);box-shadow:0 8px 32px rgba(21,101,255,.1);transform:translateY(-4px)}
 .ind-ico{
-  width:52px;height:52px;
-  background:rgba(255,255,255,.03);border:1px solid var(--border);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  width:56px;height:56px;
+  background:rgba(21,101,255,.08);border:1px solid rgba(21,101,255,.15);
+  border-radius:16px;display:flex;align-items:center;justify-content:center;
   flex-shrink:0;transition:all .35s var(--spring);
+  color:var(--blue2);
 }
-.ind-card:hover .ind-ico{background:rgba(255,255,255,.06);border-color:var(--border)}
-.ind-label{font-family:var(--font-b);font-size:11px;font-weight:600;color:var(--sub);text-align:center;line-height:1.35}
-.ind-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s var(--spring);opacity:0;pointer-events:none}
-.ind-slider-wrap:hover .ind-arrow{opacity:1;pointer-events:auto}
-.ind-arrow:hover{background:var(--bg3);border-color:var(--border)}
-.ind-arrow.prev{left:-10px}
-.ind-arrow.next{right:-10px}
-@media(max-width:768px){.ind-card{flex:0 0 130px;padding:22px 10px}.ind-arrow{display:none}}
+.ind-ico svg{color:var(--blue2)}
+.ind-card:hover .ind-ico{background:rgba(21,101,255,.15);border-color:var(--blue);transform:scale(1.1) rotate(-5deg)}
+.ind-label{font-family:var(--font-b);font-size:12px;font-weight:700;color:var(--sub);text-align:center;line-height:1.4;transition:color .3s;letter-spacing:.3px}
+.ind-card:hover .ind-label{color:var(--text)}
+@media(max-width:1024px){
+  .svc-card:nth-child(1), .svc-card:nth-child(4) { grid-column: span 1; }
+}
+@media(max-width:768px){
+  .ind-card{width:140px;padding:20px 12px}
+  .ind-ico{width:46px;height:46px}
+}
 
 /* ═══════════════════════════════════════════════════
    PROCESS
@@ -546,9 +579,7 @@ include __DIR__ . '/includes/header.php';
 
   <div class="hero-content">
     <div class="hero-badge"><span class="badge-dot"></span>Digital Marketing Agency in Pakistan</div>
-    <h1 class="hero-h1">
-      Helping Businesses Generate More <span class="word-em">Leads,</span> <span class="word-outline">Sales &amp; Revenue.</span>
-    </h1>
+    <h1 class="hero-h1">Helping Businesses Generate More Leads, Sales &amp; Revenue.</h1>
     <p class="hero-desc">We help businesses grow through <strong>SEO, Google Ads, Meta Ads, Web Design, AI Automation,</strong> and Performance Marketing &mdash; with full transparency, no lock-in contracts, and results you can actually measure.</p>
     <div class="hero-actions">
       <a href="/contact.php" class="btn-primary">
@@ -655,20 +686,29 @@ include __DIR__ . '/includes/header.php';
     <?php
     $svcs=[
       ['01','SEO Optimization','Having a beautiful website means nothing if nobody finds it. We optimise from the inside out so search engines love you.',
-       '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3c-3 3.5-3 9.5 0 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3c3 3.5 3 9.5 0 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'],
+       '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3c-3 3.5-3 9.5 0 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3c3 3.5 3 9.5 0 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+       '/seo.php'],
       ['02','Digital Advertising','Put your brand in front of people already eager to buy. Every dollar turns into measurable revenue.',
-       '<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 9h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 15h4M14 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'],
+       '<rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 9h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 15h4M14 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+       '/digital-advertising.php'],
       ['03','E-Commerce Solutions','From Shopify to Amazon — we make buying fast, secure, and easy, and reduce abandoned carts.',
-       '<path d="M6 2L3 7v13a2 2 0 002 2h14a2 2 0 002-2V7l-3-5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 11a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'],
+       '<path d="M6 2L3 7v13a2 2 0 002 2h14a2 2 0 002-2V7l-3-5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 11a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+       '/e-commerce-solutions.php'],
       ['04','Web Design &amp; Dev','High-performing, mobile-first websites that run flawlessly. No slow pages, no glitches.',
-       '<rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'],
+       '<rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+       '/web-design-development.php'],
       ['05','Performance Marketing','Storytelling-style creatives that stop the scroll, paired with hyper-targeted audience data.',
-       '<rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 17l5-6 4 4 4-5 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'],
+       '<rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 17l5-6 4 4 4-5 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+       '/performance-marketing.php'],
       ['06','Brand Strategy','We understand your business DNA and architect a custom digital ecosystem that converts.',
-       '<circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'],
+       '<circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+       '/branding.php'],
+      ['07','Digital Marketing','Strategy-driven campaigns across every channel to grow brand awareness, traffic, and revenue.',
+       '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+       '/digital-marketing.php'],
     ];
     foreach($svcs as $s):?>
-    <div class="svc-card shimmer-card reveal">
+    <a href="<?=$s[4]?>" class="svc-card shimmer-card reveal">
       <div class="svc-arrow">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M4 2h6v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
@@ -678,7 +718,8 @@ include __DIR__ . '/includes/header.php';
       </div>
       <div class="svc-title"><?=$s[1]?></div>
       <div class="svc-desc"><?=$s[2]?></div>
-    </div>
+      <div class="svc-read-more">Read More <span class="svc-arrow-xs">&#8594;</span></div>
+    </a>
     <?php endforeach;?>
   </div>
 </section>
@@ -720,10 +761,17 @@ include __DIR__ . '/includes/header.php';
         </div>
         <div class="ind-label"><?=$ind[0]?></div>
       </div>
+      <?php endforeach; ?>
+      <?php /* Duplicate set for seamless infinite marquee */ ?>
+      <?php foreach($inds as $ind):?>
+      <div class="ind-card">
+        <div class="ind-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><?=$ind[1]?></svg>
+        </div>
+        <div class="ind-label"><?=$ind[0]?></div>
+      </div>
       <?php endforeach;?>
     </div>
-    <button class="ind-arrow prev" onclick="document.getElementById('indSlider').scrollBy({left:-340,behavior:'smooth'})">‹</button>
-    <button class="ind-arrow next" onclick="document.getElementById('indSlider').scrollBy({left:340,behavior:'smooth'})">›</button>
   </div>
 </section>
 
@@ -963,6 +1011,129 @@ include __DIR__ . '/includes/header.php';
 /* CARD SPOTLIGHT */
 var svcCards=document.querySelectorAll('.svc-card');
 for(var i=0;i<svcCards.length;i++){(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});})(svcCards[i]);}
+
+/* ── HERO GSAP TIMELINE ── */
+document.addEventListener('DOMContentLoaded', function() {
+  // Only run if GSAP + SplitType are loaded
+  if(typeof gsap === 'undefined') return;
+
+  var tl = gsap.timeline({delay: 0.1});
+
+  // Split hero H1 into chars
+  if(typeof SplitType !== 'undefined') {
+    var heroH1 = document.querySelector('.hero-h1');
+    if(heroH1) {
+      var split = new SplitType(heroH1, {types: 'words'});
+      gsap.set(heroH1, {opacity: 1});
+      tl.from(split.words, {
+        opacity: 0, y: 60, rotateX: -80,
+        stagger: 0.06, duration: 1.0,
+        ease: 'back.out(1.5)',
+        transformPerspective: 800
+      }, 0.2);
+    }
+  }
+
+  // Hero sub elements
+  tl.from('.hero-badge', {opacity:0, y:20, duration:0.6, ease:'power3.out'}, 0.0)
+    .from('.hero-desc', {opacity:0, y:30, duration:0.8, ease:'power3.out'}, 0.5)
+    .from('.hero-actions', {opacity:0, y:20, duration:0.7, ease:'power3.out'}, 0.7)
+    .from('.hero-stats .stat', {opacity:0, y:20, stagger:0.1, duration:0.6, ease:'power3.out'}, 0.85)
+    .from('.hero-scroll', {opacity:0, duration:0.5, ease:'power2.out'}, 1.1)
+    .from('.hf-scene', {opacity:0, x:40, duration:1.0, ease:'power3.out'}, 0.4);
+
+  // GSAP ScrollTrigger stagger for service cards
+  gsap.utils.toArray('.svc-grid .svc-card').forEach(function(card, i) {
+    gsap.from(card, {
+      opacity:0, y:60, scale:0.95, rotateY: i%2===0?-3:3,
+      duration:1, delay: i * 0.1,
+      ease:'power4.out',
+      scrollTrigger:{trigger:card, start:'top 88%', toggleActions:'play none none none'},
+      transformPerspective:800
+    });
+  });
+
+  // Industries marquee cards stagger
+  gsap.fromTo('.ind-slider .ind-card',
+    {opacity:0, y:30, scale:0.9},
+    {
+      opacity:1, y:0, scale:1,
+      duration:0.6, stagger:0.04,
+      ease:'power3.out',
+      scrollTrigger:{trigger:'.ind-slider-wrap', start:'top 95%', once:true}
+    }
+  );
+
+  // Pain section frustration items
+  gsap.utils.toArray('.frust-item').forEach(function(item, i) {
+    gsap.from(item, {
+      opacity:0, x:40,
+      duration:0.7, delay:i*0.1,
+      ease:'power3.out',
+      scrollTrigger:{trigger:item, start:'top 88%'}
+    });
+  });
+
+  // GSAP ScrollTrigger for process cards
+  gsap.utils.toArray('.process-card').forEach(function(card, i) {
+    gsap.from(card, {
+      opacity:0, y:40,
+      duration:0.8, delay: i * 0.1,
+      ease:'power3.out',
+      scrollTrigger:{trigger:card, start:'top 88%', toggleActions:'play none none none'}
+    });
+  });
+
+  // GSAP ScrollTrigger for testimonials
+  gsap.utils.toArray('.testi-card').forEach(function(card, i) {
+    gsap.from(card, {
+      opacity:0, y:50, scale:0.95, rotateX:8,
+      duration:1, delay: i * 0.15,
+      ease:'power4.out',
+      scrollTrigger:{trigger:card, start:'top 88%', toggleActions:'play none none none'},
+      transformPerspective:800
+    });
+  });
+
+  // GSAP ScrollTrigger for portfolio cards
+  gsap.utils.toArray('.port-home-card').forEach(function(card, i) {
+    gsap.from(card, {
+      opacity:0, y:50, scale:0.95,
+      duration:1, delay: i * 0.12,
+      ease:'power4.out',
+      scrollTrigger:{trigger:card, start:'top 88%', toggleActions:'play none none none'}
+    });
+  });
+
+  // Blog cards stagger
+  gsap.utils.toArray('.blog-grid-home .blog-card').forEach(function(card, i) {
+    gsap.from(card, {
+      opacity:0, y:50, scale:0.95,
+      duration:1, delay: i * 0.12,
+      ease:'power4.out',
+      scrollTrigger:{trigger:card, start:'top 88%'}
+    });
+  });
+
+  // Counter animation
+  gsap.utils.toArray('.counter').forEach(function(el) {
+    if(el.dataset.done) return;
+    ScrollTrigger.create({
+      trigger: el, start:'top 85%',
+      onEnter: function() {
+        el.dataset.done = '1';
+        var target = +el.dataset.t;
+        gsap.fromTo(el, {innerHTML:0}, {
+          innerHTML:target, duration:2.5, ease:'power4.out',
+          snap:{innerHTML:1},
+          onUpdate:function(){el.innerHTML=Math.round(el.innerHTML)+'+'}
+        });
+      }
+    });
+  });
+
+  ScrollTrigger.refresh();
+});
 </script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>

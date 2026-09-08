@@ -155,9 +155,7 @@ include __DIR__ . '/includes/header.php';
   <div class="contact-hero-content">
     <div class="contact-breadcrumb"><a href="/">Home</a><span>/</span><span style="color:var(--text)">Contact</span></div>
     <div class="contact-hero-badge">Let's Talk</div>
-    <h1 class="contact-hero-h1">
-      Ready to Start <span class="em">Growing?</span>
-    </h1>
+    <h1 class="contact-hero-h1">Ready to Start Growing?</h1>
     <p class="contact-hero-desc">Tell us about your business, your goals, and your current challenges. A member of the Nexos team will reply within 24 hours &mdash; usually much sooner.</p>
   </div>
 </section>
@@ -175,11 +173,11 @@ include __DIR__ . '/includes/header.php';
           <div class="info-card-title">Get in Touch</div>
           <div class="cinfo-item">
             <div class="cinfo-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 13.9v2A1.5 1.5 0 0115.5 17a14.5 14.5 0 01-6.3-2.2A14.3 14.3 0 014.7 10 14.5 14.5 0 012.5 3.7 1.5 1.5 0 014 2.2h2a1.5 1.5 0 011.5 1.3c.1.8.3 1.5.5 2.2a1.5 1.5 0 01-.3 1.5L6.7 8.2A12 12 0 0010.7 12l1-.9a1.5 1.5 0 011.6-.4c.7.2 1.4.4 2.2.5A1.5 1.5 0 0117 13.9Z" stroke="currentColor" stroke-width="1.5"/></svg></div>
-            <div><div class="cinfo-label">Phone</div><div class="cinfo-value"><a href="tel:+923001234567">+92 300 123 4567</a></div></div>
+            <div><div class="cinfo-label">Phone</div><div class="cinfo-value"><a href="tel:+923224313775">+92 322 431 3775</a></div></div>
           </div>
           <div class="cinfo-item">
             <div class="cinfo-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1Z" stroke="currentColor" stroke-width="1.5"/><path d="M2 6l8 5.5L18 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <div><div class="cinfo-label">Email</div><div class="cinfo-value"><a href="mailto:hello@nexosdigital.com">hello@nexosdigital.com</a></div></div>
+            <div><div class="cinfo-label">Email</div><div class="cinfo-value"><a href="mailto:info@nexosdigitalagency.com">info@nexosdigitalagency.com</a></div></div>
           </div>
           <div class="cinfo-item">
             <div class="cinfo-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a7 7 0 100 14A7 7 0 0010 2Z" stroke="currentColor" stroke-width="1.5"/><path d="M10 5v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
@@ -187,7 +185,7 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div class="cinfo-item">
             <div class="cinfo-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 016 6c0 4-6 10-6 10S4 12 4 8a6 6 0 016-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
-            <div><div class="cinfo-label">Location</div><div class="cinfo-value">Lahore, Pakistan</div></div>
+            <div><div class="cinfo-label">Location</div><div class="cinfo-value">Salamat Pura Station - Orange Line Metro Train Lahore</div></div>
           </div>
           <div class="info-response">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -303,5 +301,44 @@ include __DIR__ . '/includes/header.php';
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+
+  // Form fields stagger in
+  var formGroups=document.querySelectorAll('.form-group,.form-row');
+  if(formGroups.length){
+    gsap.from(formGroups,{
+      opacity:0,y:30,stagger:.08,duration:.7,ease:'power3.out',delay:.3,
+      scrollTrigger:{trigger:'.form-card',start:'top 80%'}
+    });
+  }
+
+  // Info card items stagger
+  gsap.utils.toArray('.cinfo-item').forEach(function(item,i){
+    gsap.from(item,{
+      opacity:0,x:-30,duration:.6,delay:i*.08,ease:'power3.out',
+      scrollTrigger:{trigger:item,start:'top 90%'}
+    });
+  });
+
+  // Trust bar items
+  gsap.utils.toArray('.trust-item').forEach(function(item,i){
+    gsap.from(item,{
+      opacity:0,y:20,scale:.9,duration:.5,delay:i*.1,ease:'back.out(1.5)',
+      scrollTrigger:{trigger:'.trust-bar',start:'top 85%'}
+    });
+  });
+
+  // FAQ cards
+  gsap.utils.toArray('.faq-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:40,duration:.8,delay:i*.08,ease:'power3.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+});
+</script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>

@@ -21,28 +21,71 @@ include __DIR__ . '/includes/header.php';
 .svc-hero-h1 .em{background:linear-gradient(135deg,var(--blue),var(--blue2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
 .svc-hero-desc{font-family:var(--font-b);font-size:17px;color:var(--sub);line-height:1.85;max-width:620px;opacity:0;animation:fadeUp .9s .38s var(--ease) forwards}
 
-/* SERVICE ROWS */
-.svc-full-grid{display:grid;grid-template-columns:1fr;gap:0}
-.svc-full-row{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:100px 0;border-bottom:1px solid var(--border);position:relative}
-.svc-full-row:last-child{border-bottom:none}
-.svc-full-row.reverse .svc-full-visual{order:-1}
-.svc-full-num{font-family:var(--font-h);font-size:clamp(70px,9vw,130px);font-weight:900;color:var(--sub);line-height:1;margin-bottom:8px;opacity:.1}
-.svc-full-title{font-family:var(--font-h);font-size:clamp(26px,3vw,42px);font-weight:800;color:var(--text);margin-bottom:16px;line-height:1.15}
-.svc-full-desc{font-family:var(--font-b);font-size:15px;color:var(--sub);line-height:1.85;margin-bottom:0}
-.svc-tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.svc-tag{font-family:var(--font-h);font-size:10px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:5px 14px;border-radius:100px;letter-spacing:.5px;transition:all .3s var(--spring)}
-.svc-tag:hover{background:rgba(255,255,255,.06);border-color:var(--border);color:var(--text)}
-.svc-full-visual{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-xl);height:380px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:all .4s var(--spring)}
-.svc-full-visual img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .6s var(--ease),opacity .4s}
-.svc-full-row:hover .svc-full-visual{border-color:var(--border)}
-.svc-full-row:hover .svc-full-visual img{transform:scale(1.06);opacity:1}
-.svc-ico-big{width:80px;height:80px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:all .3s var(--spring)}
-.svc-full-row:hover .svc-ico-big{transform:scale(1.08) rotate(-4deg)}
+/* SERVICE TIMELINE — UNIQUE ZIGZAG */
+.svc-timeline-sec{background:var(--bg);padding:0 64px 40px;position:relative;overflow:hidden}
+.timeline-grid{display:grid;position:relative}
+.timeline-grid::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--blue),var(--blue2),var(--border),transparent);
+}
+.tl-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:34px;position:relative}
+.tl-row:last-child{margin-bottom:0}
+.tl-card{
+  position:relative;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-xl);overflow:hidden;
+  transition:all .4s var(--spring);
+}
+.tl-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--blue2));
+  opacity:0;transition:opacity .4s;z-index:3;
+}
+.tl-card:hover{
+  border-color:rgba(21,101,255,.35);
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(0,0,0,.35);
+}
+.tl-card:hover::before{opacity:1}
+.tl-dot-center{
+  position:absolute;left:50%;top:40px;transform:translateX(-50%);
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg2);border:4px solid var(--blue2);
+  box-shadow:0 0 0 6px rgba(21,101,255,.12);
+  transition:all .3s var(--spring);z-index:2;
+}
+.tl-row:hover .tl-dot-center{box-shadow:0 0 0 10px rgba(21,101,255,.2);transform:translateX(-50%) scale(1.15)}
+.tl-num{
+  position:absolute;font-family:var(--font-h);font-weight:800;
+  font-size:110px;line-height:1;color:rgba(21,101,255,.06);
+  top:2px;right:0;pointer-events:none;user-select:none;
+  transition:color .4s;
+}
+.tl-card:hover .tl-num{color:rgba(21,101,255,.14)}
+.tl-year-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-h);font-size:11px;font-weight:800;
+  color:var(--blue2);letter-spacing:1.6px;text-transform:uppercase;
+  background:rgba(21,101,255,.08);border:1px solid rgba(21,101,255,.2);
+  padding:6px 14px;border-radius:100px;margin-bottom:16px;
+}
+.tl-year-chip svg{width:13px;height:13px}
+.tl-title{font-family:var(--font-h);font-size:clamp(24px,2.6vw,36px);font-weight:800;color:var(--text);margin-bottom:14px;line-height:1.15}
+.tl-desc{font-family:var(--font-b);font-size:14px;color:var(--sub);line-height:1.85}
+.svc-tl-media{height:200px;margin:0 0 24px;overflow:hidden;position:relative;background:var(--bg3);border-bottom:1px solid var(--border)}
+.svc-tl-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.tl-card:hover .svc-tl-media img{transform:scale(1.06)}
+.svc-tl-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,16,.55),transparent 55%);pointer-events:none}
+.svc-tl-ico{position:absolute;left:22px;bottom:16px;width:48px;height:48px;border-radius:14px;background:rgba(10,12,20,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(21,101,255,.25);display:flex;align-items:center;justify-content:center;color:var(--blue2);transition:all .3s var(--spring)}
+.tl-card:hover .svc-tl-ico{transform:scale(1.08) rotate(-4deg)}
+.svc-tl-body{position:relative;padding:0 32px 34px}
 .feature-list{display:flex;flex-direction:column;gap:12px;margin-top:28px}
 .feature-item{display:flex;align-items:flex-start;gap:12px;font-family:var(--font-b);font-size:14px;color:var(--sub);line-height:1.6;transition:color .2s}
 .feature-item:hover{color:var(--text)}
 .feature-dot{width:20px;height:20px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .3s var(--spring)}
 .feature-item:hover .feature-dot{background:rgba(255,255,255,.06);transform:scale(1.1)}
+.svc-tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.svc-tag{font-family:var(--font-h);font-size:10px;font-weight:600;color:var(--sub);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:5px 14px;border-radius:100px;letter-spacing:.5px;transition:all .3s var(--spring)}
+.svc-tag:hover{background:rgba(255,255,255,.06);border-color:var(--border);color:var(--text)}
 
 /* WHY CHOOSE US */
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px}
@@ -89,42 +132,41 @@ include __DIR__ . '/includes/header.php';
 .svc-cta .em{background:linear-gradient(135deg,var(--blue),var(--blue2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* RESPONSIVE */
-@keyframes svcRowIn{from{opacity:0;transform:translateY(60px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes svcVisualIn{from{opacity:0;transform:translateX(40px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
-@keyframes svcTextIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
-@keyframes featureSlideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
-.svc-full-row.reveal.reveal .feature-item{animation:featureSlideIn .5s var(--premium) both}
-.svc-full-row.reveal.reveal .feature-item:nth-child(1){animation-delay:.3s}
-.svc-full-row.reveal.reveal .feature-item:nth-child(2){animation-delay:.38s}
-.svc-full-row.reveal.reveal .feature-item:nth-child(3){animation-delay:.46s}
-.svc-full-row.reveal.reveal .feature-item:nth-child(4){animation-delay:.54s}
-.svc-full-row.reveal.reveal .feature-item:nth-child(5){animation-delay:.62s}
-.svc-full-row.reveal.reveal .feature-item:nth-child(6){animation-delay:.7s}
-@keyframes tagPopIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-.svc-full-row.reveal.reveal .svc-tag{animation:tagPopIn .4s var(--spring) both}
-.svc-full-row.reveal.reveal .svc-tag:nth-child(1){animation-delay:.5s}
-.svc-full-row.reveal.reveal .svc-tag:nth-child(2){animation-delay:.56s}
-.svc-full-row.reveal.reveal .svc-tag:nth-child(3){animation-delay:.62s}
-.svc-full-row.reveal.reveal .svc-tag:nth-child(4){animation-delay:.68s}
-.svc-full-row.reveal.reveal .svc-tag:nth-child(5){animation-delay:.74s}
-@keyframes numFadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.svc-full-row.reveal.reveal .svc-full-num{animation:numFadeIn .7s var(--premium) both}
+@keyframes svcTagPop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.tl-row.reveal.reveal .svc-tag{animation:svcTagPop .4s var(--spring) both}
+.tl-row.reveal.reveal .svc-tag:nth-child(1){animation-delay:.45s}
+.tl-row.reveal.reveal .svc-tag:nth-child(2){animation-delay:.52s}
+.tl-row.reveal.reveal .svc-tag:nth-child(3){animation-delay:.59s}
+.tl-row.reveal.reveal .svc-tag:nth-child(4){animation-delay:.66s}
+.tl-row.reveal.reveal .svc-tag:nth-child(5){animation-delay:.73s}
+@keyframes svcFeatureIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.tl-row.reveal.reveal .feature-item{animation:svcFeatureIn .5s var(--premium) both}
+.tl-row.reveal.reveal .feature-item:nth-child(1){animation-delay:.3s}
+.tl-row.reveal.reveal .feature-item:nth-child(2){animation-delay:.36s}
+.tl-row.reveal.reveal .feature-item:nth-child(3){animation-delay:.42s}
+.tl-row.reveal.reveal .feature-item:nth-child(4){animation-delay:.48s}
+.tl-row.reveal.reveal .feature-item:nth-child(5){animation-delay:.54s}
+.tl-row.reveal.reveal .feature-item:nth-child(6){animation-delay:.6s}
 @media(max-width:1024px){
   .svc-hero,.pricing-sec,.svc-cta{padding-left:28px;padding-right:28px}
-  .svc-full-row.svc-full-row{grid-template-columns:1fr;gap:40px;padding:70px 0}
-  .svc-full-row.reverse .svc-full-visual{order:0}
-  .svc-full-visual{height:280px}
+  .svc-timeline-sec{padding-left:28px;padding-right:28px}
   .pricing-grid{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:640px){
   .svc-hero{padding:130px 20px 60px}
-  .pricing-sec,.svc-cta{padding-left:20px;padding-right:20px}
-  .svc-full-row{padding:50px 0}
-  .svc-full-visual{height:220px}
+  .pricing-sec,.svc-cta,.svc-timeline-sec{padding-left:20px;padding-right:20px}
   .pricing-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
   .svc-tag-list{gap:6px}
+  .timeline-grid::before{left:12px}
+  .tl-row{grid-template-columns:1fr;gap:20px}
+  .tl-dot-center{left:12px;top:40px;width:16px;height:16px;border-width:3px;box-shadow:0 0 0 5px rgba(21,101,255,.12)}
+  .tl-card{margin-left:32px}
+  .tl-num{font-size:76px}
+  .svc-tl-media{height:150px;margin:0 0 20px}
+  .svc-tl-body{padding:0 20px 26px}
+  .svc-tl-ico{width:40px;height:40px;left:16px;bottom:12px}
 }
 </style>
 
@@ -143,13 +185,18 @@ include __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<!-- SERVICES DETAIL -->
-<section class="sec" style="background:var(--bg)" data-no-fade>
-  <div class="svc-full-grid">
+<!-- SERVICES TIMELINE -->
+<section class="svc-timeline-sec" data-no-fade>
+  <div style="max-width:860px;margin:0 auto 0">
+    <div class="sec-label reveal" data-delay="0" style="margin-bottom:18px">What We Do</div>
+    <h2 class="sec-h reveal" data-delay="80" style="font-size:clamp(30px,4vw,52px);margin-bottom:14px">Seven Services, One <span class="em">Growth Engine</span></h2>
+    <p class="sec-sub reveal" data-delay="160" style="font-size:15px;margin-bottom:56px">Each service is a lever. Pulled together, they compound into sustained, measurable growth for your business.</p>
+  </div>
+  <div class="timeline-grid">
     <?php
     $services=[
       [
-        'id'=>'seo','num'=>'01','title'=>'SEO Optimization','reverse'=>false,
+        'id'=>'seo','num'=>'01','title'=>'SEO Optimization',
         'desc'=>'Having a beautiful website does not matter if nobody finds it. We optimize your site from the inside out &mdash; from technical architecture to content strategy &mdash; so search engines love it and your ideal customers find exactly what they are looking for.',
         'features'=>['Full technical SEO audit & fixes','Keyword research & competitor gap analysis','On-page & off-page optimization','Monthly ranking reports in plain English','Local SEO for brick-and-mortar businesses','Content strategy & blog SEO'],
         'tags'=>['On-Page SEO','Technical SEO','Link Building','Local SEO','Content Strategy'],
@@ -158,7 +205,7 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/seo.php',
       ],
       [
-        'id'=>'ads','num'=>'02','title'=>'Digital Advertising (Meta & Google)','reverse'=>true,
+        'id'=>'ads','num'=>'02','title'=>'Digital Advertising (Meta & Google)',
         'desc'=>'Put your brand directly in front of people who are already eager to buy. Through precise Meta Ads management and targeted Google campaigns, we stop wasted budget and turn every dollar you spend into measurable, real revenue growth.',
         'features'=>['Meta (Facebook & Instagram) Ads setup & management','Google Search, Display & Shopping Ads','Audience research & retargeting funnels','A/B testing ad creatives & copy','Real-time budget optimization','Weekly ROI performance reports'],
         'tags'=>['Meta Ads','Google Ads','Retargeting','Lead Generation','ROI Tracking'],
@@ -167,7 +214,7 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/digital-advertising.php',
       ],
       [
-        'id'=>'ecom','num'=>'03','title'=>'E-Commerce Solutions','reverse'=>false,
+        'id'=>'ecom','num'=>'03','title'=>'E-Commerce Solutions',
         'desc'=>'Whether launching your first storefront or expanding onto global marketplaces, we build seamless e-commerce experiences. From reducing abandoned carts on Shopify to dominating Amazon search &mdash; we make buying fast, secure, and easy.',
         'features'=>['Shopify & WooCommerce store builds','Amazon & Daraz marketplace optimization','Conversion rate optimization (CRO)','Product page design & copywriting','Payment gateway & logistics integration','Abandoned cart recovery flows'],
         'tags'=>['Shopify','WooCommerce','Amazon','Marketplace SEO','CRO'],
@@ -176,7 +223,7 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/e-commerce-solutions.php',
       ],
       [
-        'id'=>'web','num'=>'04','title'=>'Web Design & Development','reverse'=>true,
+        'id'=>'web','num'=>'04','title'=>'Web Design & Development',
         'desc'=>'People judge a business by its digital cover. We specialise in clean, corporate, and tech-focused aesthetics that command authority. High-performing, mobile-friendly websites that run flawlessly &mdash; no glitchy pages, no slow load times.',
         'features'=>['Custom website design (no templates)','Mobile-first, responsive development','Speed & Core Web Vitals optimization','CMS integration (WordPress, custom)','Landing page design & A/B testing','12-month post-launch support'],
         'tags'=>['Web Design','WordPress','Custom Dev','Landing Pages','UI/UX'],
@@ -185,7 +232,7 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/web-design-development.php',
       ],
       [
-        'id'=>'perf','num'=>'05','title'=>'Performance Marketing','reverse'=>false,
+        'id'=>'perf','num'=>'05','title'=>'Performance Marketing',
         'desc'=>'Storytelling-style ad creatives that stop people from scrolling, combined with hyper-targeted audience data. Every campaign is launched with real numbers, not hunches &mdash; delivering measurable ROI and compounding returns over time.',
         'features'=>['UGC & storytelling-style video ads','Hyper-targeted audience segmentation','Full-funnel campaign architecture','Influencer & content partnership strategy','Cross-channel attribution tracking','Scaling profitable campaigns aggressively'],
         'tags'=>['Performance Ads','Video Creative','UGC','Attribution','Scaling'],
@@ -194,7 +241,7 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/performance-marketing.php',
       ],
       [
-        'id'=>'ai','num'=>'06','title'=>'AI Automation','reverse'=>true,
+        'id'=>'ai','num'=>'06','title'=>'AI Automation',
         'desc'=>'Save hours every week and scale without scaling headcount. We design, build, and deploy AI-powered workflows tailored to your business &mdash; from intelligent chatbots and automated lead qualification to smart reporting systems and CRM automation.',
         'features'=>['AI chatbot design & deployment','Lead qualification & nurturing automation','CRM & workflow automation (Zapier, Make)','Automated reporting dashboards','Email & WhatsApp follow-up sequences','Custom AI tool integrations'],
         'tags'=>['AI Chatbots','Workflow Automation','CRM Automation','Lead Nurturing','Zapier/Make'],
@@ -203,7 +250,7 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/ai-automation.php',
       ],
       [
-        'id'=>'brand','num'=>'07','title'=>'Brand Strategy & Identity','reverse'=>false,
+        'id'=>'brand','num'=>'07','title'=>'Brand Strategy & Identity',
         'desc'=>'We do not believe in generic templates. We sit down with you, understand your business DNA, and architect a custom digital ecosystem &mdash; your brand story told with precision and impact across every channel and touchpoint.',
         'features'=>['Brand identity design (logo, colours, fonts)','Messaging & brand voice development','Competitor positioning analysis','Social media brand kit & guidelines','Email marketing templates & sequences','Pitch deck & presentation design'],
         'tags'=>['Brand Identity','Logo Design','Messaging','Social Branding','Pitch Decks'],
@@ -212,36 +259,47 @@ include __DIR__ . '/includes/header.php';
         'detail_link'=>'/branding.php',
       ],
     ];
-    foreach($services as $si=>$svc):?>
-    <div class="svc-full-row reveal<?=$svc['reverse']?' reverse':''?>" data-delay="<?=$si*120?>" id="<?=$svc['id']?>">
-      <div class="svc-full-text">
-        <div class="svc-full-num"><?=$svc['num']?></div>
-        <h2 class="svc-full-title"><?=h($svc['title'])?></h2>
-        <p class="svc-full-desc"><?=h($svc['desc'])?></p>
-        <div class="feature-list">
-          <?php foreach($svc['features'] as $f):?>
-          <div class="feature-item">
-            <div class="feature-dot">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <?=h($f)?>
+    $svcLeft = false;
+    foreach($services as $svc):
+      $svcLeft = !$svcLeft;?>
+    <div class="tl-row reveal" id="<?=$svc['id']?>">
+      <div class="tl-col" style="grid-column:<?=$svcLeft?'1':'2'?>;grid-row:1">
+        <div class="tl-card">
+          <div class="svc-tl-media">
+            <img src="<?=$svc['image']?>" alt="<?=h($svc['title'])?>" loading="lazy">
+            <span class="svc-tl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><?=$svc['icon']?></svg></span>
           </div>
-          <?php endforeach;?>
-        </div>
-        <div class="svc-tag-list">
-          <?php foreach($svc['tags'] as $tag):?>
-          <span class="svc-tag"><?=h($tag)?></span>
-          <?php endforeach;?>
-        </div>
-        <div style="margin-top:36px">
-          <a href="<?= !empty($svc['detail_link']) ? $svc['detail_link'] : '/contact.php'; ?>" class="btn-primary">Get Started &rarr;</a>
+          <div class="svc-tl-body">
+            <span class="tl-num"><?=$svc['num']?></span>
+            <div class="tl-year-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Service <?=$svc['num']?>
+            </div>
+            <h2 class="tl-title"><?=h($svc['title'])?></h2>
+            <p class="tl-desc"><?=h($svc['desc'])?></p>
+            <div class="svc-tag-list">
+              <?php foreach($svc['tags'] as $tag):?>
+              <span class="svc-tag"><?=h($tag)?></span>
+              <?php endforeach;?>
+            </div>
+            <div class="feature-list">
+              <?php foreach($svc['features'] as $f):?>
+              <div class="feature-item">
+                <div class="feature-dot">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <?=h($f)?>
+              </div>
+              <?php endforeach;?>
+            </div>
+            <div style="margin-top:30px">
+              <a href="<?= !empty($svc['detail_link']) ? $svc['detail_link'] : '/contact.php'; ?>" class="btn-outline">Explore Service &rarr;</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="svc-full-vis">
-        <div class="svc-full-visual">
-          <img src="<?=$svc['image']?>" alt="<?=h($svc['title'])?>">
-        </div>
-      </div>
+      <div class="tl-dot-center"></div>
+      <div class="tl-col" style="grid-column:<?=$svcLeft?'2':'1'?>;grid-row:1"></div>
     </div>
     <?php endforeach;?>
   </div>
@@ -334,5 +392,60 @@ include __DIR__ . '/includes/header.php';
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+
+  // Service timeline rows - cards draw in from alternating sides
+  gsap.utils.toArray('.tl-row').forEach(function(row,i){
+    var card=row.querySelector('.tl-card');
+    var leftCol=row.querySelector('.tl-col');
+
+    if(card&&leftCol){
+      var isLeft=leftCol.style.gridColumn==='1'||leftCol.style.gridColumn==='1 ;';
+      gsap.from(card,{
+        opacity:0,x:isLeft?-60:60,duration:1.1,ease:'power4.out',
+        scrollTrigger:{trigger:row,start:'top 80%'}
+      });
+    }
+
+    // Feature list items stagger
+    var features=row.querySelectorAll('.feature-item');
+    if(features.length){
+      gsap.from(features,{
+        opacity:0,y:14,stagger:.06,duration:.5,ease:'power3.out',
+        scrollTrigger:{trigger:row,start:'top 72%'},delay:.35
+      });
+    }
+
+    // Tags stagger
+    var tags=row.querySelectorAll('.svc-tag');
+    if(tags.length){
+      gsap.from(tags,{
+        opacity:0,scale:.8,stagger:.05,duration:.35,ease:'back.out(1.5)',
+        scrollTrigger:{trigger:row,start:'top 72%'},delay:.5
+      });
+    }
+  });
+
+  // Why choose us cards
+  gsap.utils.toArray('.why-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:50,scale:.95,duration:.8,delay:i*.1,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+
+  // Pricing cards
+  gsap.utils.toArray('.price-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:60,scale:.95,rotateY:i===1?0:(i===0?-5:5),duration:1,delay:i*.15,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'},
+      transformPerspective:800
+    });
+  });
+});
+</script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>

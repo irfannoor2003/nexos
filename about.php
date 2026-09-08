@@ -44,9 +44,9 @@ include __DIR__ . '/includes/header.php';
 .story-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .story-img-wrap:hover img{transform:scale(1.04)}
 .story-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.2),transparent 60%);pointer-events:none}
-.story-img-badge{position:absolute;bottom:24px;left:24px;background:rgba(6,8,16,.85);backdrop-filter:blur(12px);border:1px solid var(--border-accent);border-radius:var(--r-lg);padding:16px 24px;display:flex;align-items:center;gap:12px;z-index:1}
+.story-img-badge{position:absolute;bottom:24px;left:24px;background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 24px;display:flex;align-items:center;gap:12px;z-index:1}
 .story-img-badge .badge-num{font-family:var(--font-h);font-size:28px;font-weight:800;color:var(--text)}
-.story-img-badge .badge-text{font-size:12px;color:rgba(200,210,240,.7);line-height:1.4}
+.story-img-badge .badge-text{font-size:12px;color:var(--sub);line-height:1.4}
 
 /* MISSION CARDS */
 .mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
@@ -59,21 +59,57 @@ include __DIR__ . '/includes/header.php';
 .mission-title{font-family:var(--font-h);font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px}
 .mission-desc{font-family:var(--font-b);font-size:14px;color:var(--sub);line-height:1.8}
 
-/* TIMELINE */
-.timeline-sec{background:var(--bg2);padding:100px 60px;position:relative}
+/* TIMELINE — UNIQUE ZIGZAG */
+.timeline-sec{background:var(--bg2);padding:100px 60px;position:relative;overflow:hidden}
 .timeline-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-accent),transparent)}
-.timeline-wrap{max-width:800px;margin:0 auto;position:relative;padding-left:48px}
-.timeline-wrap::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--border)}
-.tl-item{position:relative;margin-bottom:48px;opacity:0;transform:translateY(20px);transition:all .6s var(--ease)}
-.tl-item.vis{opacity:1;transform:translateY(0)}
-.tl-item:last-child{margin-bottom:0}
-.tl-dot{position:absolute;left:-40px;top:6px;width:18px;height:18px;background:var(--bg2);border:3px solid var(--sub);border-radius:50%;transition:all .3s var(--spring)}
-.tl-item:hover .tl-dot{transform:scale(1.3)}
-.tl-content{background:var(--card);border:1px solid var(--border);border-radius:var(--r-xl);padding:28px 32px;transition:all .4s var(--spring)}
-.tl-item:hover .tl-content{border-color:var(--border)}
-.tl-year{font-family:var(--font-h);font-size:12px;font-weight:700;color:var(--sub);letter-spacing:1px;margin-bottom:8px}
-.tl-title{font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
+.timeline-grid{display:grid;position:relative;margin-top:70px}
+.timeline-grid::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--blue),var(--blue2),var(--border),transparent);
+}
+.tl-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:34px;position:relative}
+.tl-row:last-child{margin-bottom:0}
+.tl-card{
+  position:relative;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:34px 32px;
+  transition:all .4s var(--spring);overflow:hidden;
+}
+.tl-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--blue2));
+  opacity:0;transition:opacity .4s;
+}
+.tl-card:hover{
+  border-color:rgba(21,101,255,.35);
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(0,0,0,.35);
+}
+.tl-card:hover::before{opacity:1}
+.tl-year-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-h);font-size:13px;font-weight:800;
+  color:var(--blue2);letter-spacing:2px;
+  background:rgba(21,101,255,.08);border:1px solid rgba(21,101,255,.2);
+  padding:6px 14px;border-radius:100px;margin-bottom:16px;
+}
+.tl-year-chip svg{width:13px;height:13px}
+.tl-title{font-family:var(--font-h);font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px}
 .tl-desc{font-family:var(--font-b);font-size:14px;color:var(--sub);line-height:1.75}
+.tl-dot-center{
+  position:absolute;left:50%;top:28px;transform:translateX(-50%);
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg2);border:4px solid var(--blue2);
+  box-shadow:0 0 0 6px rgba(21,101,255,.12);
+  transition:all .3s var(--spring);z-index:2;
+}
+.tl-row:hover .tl-dot-center{box-shadow:0 0 0 10px rgba(21,101,255,.2);transform:translateX(-50%) scale(1.15)}
+.tl-num{
+  position:absolute;font-family:var(--font-h);font-weight:800;
+  font-size:96px;line-height:1;color:rgba(21,101,255,.05);
+  top:8px;right:20px;pointer-events:none;user-select:none;
+  transition:color .4s;
+}
+.tl-card:hover .tl-num{color:rgba(21,101,255,.12)}
 
 /* VALUES */
 .val-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:60px}
@@ -132,8 +168,12 @@ include __DIR__ . '/includes/header.php';
   .stat-box-n{font-size:34px}
   .team-grid{grid-template-columns:1fr}
   .val-grid{grid-template-columns:1fr}
-  .timeline-wrap{padding-left:36px}
   .story-img-wrap{height:300px}
+  .timeline-grid::before{left:12px}
+  .tl-row{grid-template-columns:1fr;gap:20px}
+  .tl-dot-center{left:12px;top:26px;width:16px;height:16px;border-width:3px;box-shadow:0 0 0 5px rgba(21,101,255,.12)}
+  .tl-card{padding:24px 20px;margin-left:32px}
+  .tl-num{font-size:72px}
 }
 </style>
 
@@ -248,21 +288,29 @@ include __DIR__ . '/includes/header.php';
     <h2 class="sec-h reveal">From Two Founders to a <span class="em">Full-Service Agency</span></h2>
     <p class="sec-sub reveal">A decade of growth, driven by one principle: your success is our success.</p>
   </div>
-  <div class="timeline-wrap">
+  <div class="timeline-grid">
     <?php $timeline=[
       ['2017','Founded in Lahore','Nexos started with two founders and a shared frustration with how agencies treated clients. The mission: results, transparency, no nonsense.'],
       ['2019','First 50 Clients','Word-of-mouth grew the client base to 50 businesses across Pakistan. SEO and web design became our core signature services.'],
       ['2021','Expanded to International Markets','Launched Meta and Google Ads services and began serving clients in the UK, UAE, and North America.'],
       ['2023','AI & Automation Division','Added AI automation services to help clients save hours weekly and scale operations without scaling headcount.'],
       ['2025','250+ Projects & Growing','Serving 180+ active clients with a specialist team &mdash; still guided by the same founding principle: your success is our success.'],
-    ];foreach($timeline as $i=>$t):?>
-    <div class="tl-item reveal" data-delay="<?=$i*120?>">
-      <div class="tl-dot"></div>
-      <div class="tl-content">
-        <div class="tl-year"><?=$t[0]?></div>
-        <div class="tl-title"><?=h($t[1])?></div>
-        <div class="tl-desc"><?=h($t[2])?></div>
+    ];foreach($timeline as $i=>$t):
+      $left = ($i % 2 === 0);?>
+    <div class="tl-row reveal">
+      <div class="tl-col" style="grid-column:<?=$left?'1':'2'?>;grid-row:1">
+        <div class="tl-card">
+          <span class="tl-num">0<?=$i+1?></span>
+          <div class="tl-year-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <?=$t[0]?>
+          </div>
+          <div class="tl-title"><?=h($t[1])?></div>
+          <div class="tl-desc"><?=h($t[2])?></div>
+        </div>
       </div>
+      <div class="tl-dot-center"></div>
+      <div class="tl-col" style="grid-column:<?=$left?'2':'1'?>;grid-row:1"></div>
     </div>
     <?php endforeach;?>
   </div>
@@ -313,8 +361,8 @@ include __DIR__ . '/includes/header.php';
         <div class="team-role"><?=$t[1]?></div>
         <div class="team-desc"><?=h($t[3])?></div>
         <div class="team-social">
-          <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="7" x2="8" y2="7.5"/><path d="M12 11v6M12 11a3 3 0 016 0v6"/></svg></a>
-          <a href="#" aria-label="Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7.5v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+          <a href="https://www.linkedin.com/company/nexos-digital-agency/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="7" x2="8" y2="7.5"/><path d="M12 11v6M12 11a3 3 0 016 0v6"/></svg></a>
+          <a href="https://www.instagram.com/nexosdigitalagency" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
         </div>
       </div>
     </div>
@@ -338,5 +386,42 @@ include __DIR__ . '/includes/header.php';
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+
+  // Mission cards
+  gsap.utils.toArray('.mission-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:50,scale:.95,duration:.9,delay:i*.12,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+
+  // Value cards
+  gsap.utils.toArray('.val-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:50,rotateX:8,duration:.9,delay:i*.12,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'},
+      transformPerspective:800
+    });
+  });
+
+  // Team cards
+  gsap.utils.toArray('.team-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:60,scale:.95,duration:1,delay:i*.15,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+
+  // Story section image
+  gsap.from('.story-img-wrap',{
+    opacity:0,x:60,scale:.95,duration:1.1,ease:'power4.out',
+    scrollTrigger:{trigger:'.story-img-wrap',start:'top 80%'}
+  });
+});
+</script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>

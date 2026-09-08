@@ -145,7 +145,7 @@ include __DIR__ . '/partials/layout_head.php';
         <div class="form-section-title">Cover Image</div>
         <div class="form-group" style="margin-bottom:0">
           <div class="img-preview" id="img-preview" onclick="document.getElementById('cover-input').click()">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="5" width="28" height="22" rx="4" stroke="rgba(200,210,240,.3)" stroke-width="1.5"/><circle cx="10" cy="12" r="2.5" stroke="rgba(200,210,240,.3)" stroke-width="1.5"/><path d="M2 23l8-8 5 5 4-4 9 9" stroke="rgba(200,210,240,.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="5" width="28" height="22" rx="4" stroke="rgba(15,23,42,.3)" stroke-width="1.5"/><circle cx="10" cy="12" r="2.5" stroke="rgba(15,23,42,.3)" stroke-width="1.5"/><path d="M2 23l8-8 5 5 4-4 9 9" stroke="rgba(15,23,42,.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span style="font-size:12px;color:var(--sub)">Click to upload</span>
           </div>
           <input type="file" id="cover-input" name="cover_image" accept="image/*" style="display:none" onchange="previewImg(this)">
@@ -163,7 +163,7 @@ include __DIR__ . '/partials/layout_head.php';
       <div style="font-family:var(--font-h);font-weight:700;color:var(--text)">Content Preview</div>
       <button onclick="document.getElementById('preview-modal').style.display='none'" style="color:var(--sub);font-size:24px;background:none;border:none;cursor:pointer;padding:4px">×</button>
     </div>
-    <div id="preview-content" style="font-size:15px;color:rgba(200,210,240,.8);line-height:1.9;word-break:break-word"></div>
+    <div id="preview-content" style="font-size:15px;color:rgba(15,23,42,.85);line-height:1.9;word-break:break-word"></div>
   </div>
 </div>
 

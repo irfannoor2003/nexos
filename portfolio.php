@@ -284,6 +284,22 @@ gsap.registerPlugin(ScrollTrigger);
   }
 
   setActive('0');
+
+  // Portfolio grid cards stagger
+  gsap.utils.toArray('.port-grid-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:60,scale:.95,duration:1,delay:i*.12,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+
+  // Project list items slide in
+  gsap.utils.toArray('.port-item').forEach(function(item,i){
+    gsap.from(item,{
+      opacity:0,x:40,duration:.8,delay:i*.1,ease:'power3.out',
+      scrollTrigger:{trigger:item,start:'top 70%'}
+    });
+  });
 })();
 </script>
 

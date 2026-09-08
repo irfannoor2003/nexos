@@ -7,7 +7,7 @@ $db = getDB();
 
 // Handle delete
 if ($_GET['action'] ?? '' === 'delete' && isset($_GET['id'])) {
-    if (verifyCsrf()) {
+    if (hash_equals($_SESSION['csrf'] ?? '', $_GET['csrf'] ?? '')) {
         $db->prepare("DELETE FROM posts WHERE id=?")->execute([(int)$_GET['id']]);
         setFlash('success', 'Post deleted.');
     }
@@ -70,7 +70,7 @@ include __DIR__ . '/partials/layout_head.php';
     <?php foreach($posts as $p): ?>
     <tr>
       <td class="td-title"><?= h(mb_strimwidth($p['title'],0,55,'…')) ?></td>
-      <td><?= $p['cat_name'] ? h($p['cat_name']) : '<span style="color:rgba(200,210,240,.2)">—</span>' ?></td>
+      <td><?= $p['cat_name'] ? h($p['cat_name']) : '<span style="color:rgba(15,23,42,.3)">—</span>' ?></td>
       <td><span class="badge badge-<?= $p['status'] ?>"><?= $p['status'] ?></span></td>
       <td><?= number_format($p['views']) ?></td>
       <td><?= date('M j, Y', strtotime($p['created_at'])) ?></td>

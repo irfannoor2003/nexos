@@ -414,4 +414,35 @@ include __DIR__ . '/includes/header.php';
 
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined')return;
+
+  // Featured post
+  var featured=document.querySelector('.featured-post');
+  if(featured){
+    gsap.from(featured,{
+      opacity:0,y:60,scale:.97,duration:1.1,ease:'power4.out',
+      scrollTrigger:{trigger:featured,start:'top 80%'}
+    });
+  }
+
+  // Blog grid cards stagger
+  gsap.utils.toArray('.blog-grid .blog-card').forEach(function(card,i){
+    gsap.from(card,{
+      opacity:0,y:50,scale:.95,duration:.9,delay:i*.1,ease:'power4.out',
+      scrollTrigger:{trigger:card,start:'top 88%'}
+    });
+  });
+
+  // Category filter buttons
+  gsap.utils.toArray('.cat-btn').forEach(function(btn,i){
+    gsap.from(btn,{
+      opacity:0,y:20,scale:.8,duration:.4,delay:i*.05,ease:'back.out(1.5)',
+      scrollTrigger:{trigger:'.cat-filter',start:'top 90%'}
+    });
+  });
+});
+</script>
+
 <?php include __DIR__ . '/includes/footer.php'; ?>

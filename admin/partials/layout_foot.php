@@ -1,17 +1,19 @@
-  </div><!-- /admin-content -->
+</div><!-- /admin-content -->
 </main><!-- /admin-main -->
 
 <script>
-// Mobile sidebar toggle
-document.querySelector('.admin-topbar')?.addEventListener('click', function(e) {
-  if (e.target.closest('.menu-btn')) document.getElementById('sidebar').classList.toggle('open');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+const menuBtn = document.getElementById('menu-btn');
+function openSidebar(){ sidebar?.classList.add('open'); overlay?.classList.add('show'); document.body.style.overflow='hidden'; }
+function closeSidebar(){ sidebar?.classList.remove('open'); overlay?.classList.remove('show'); document.body.style.overflow=''; }
+menuBtn?.addEventListener('click', function(e){
+  e.stopPropagation();
+  sidebar?.classList.contains('open') ? closeSidebar() : openSidebar();
 });
-// Close sidebar on outside click
-document.addEventListener('click', function(e) {
-  const sb = document.getElementById('sidebar');
-  if (window.innerWidth < 900 && sb?.classList.contains('open') && !sb.contains(e.target)) {
-    sb.classList.remove('open');
-  }
+overlay?.addEventListener('click', closeSidebar);
+document.querySelectorAll('.admin-sidebar a').forEach(function(a){
+  a.addEventListener('click', function(){ if(window.innerWidth < 901) closeSidebar(); });
 });
 </script>
 </body>

@@ -67,7 +67,7 @@ require 'partials/layout_head.php';
       <input type="hidden" name="csrf" value="<?= csrfToken() ?>">
       <input type="hidden" name="action" value="settings">
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="two-col">
         <div class="form-group">
           <label>Site Name</label>
           <input type="text" name="site_name" value="<?= h($get('site_name','Nexos Digital')) ?>">
@@ -78,11 +78,11 @@ require 'partials/layout_head.php';
         </div>
         <div class="form-group">
           <label>Contact Email</label>
-          <input type="text" name="site_email" value="<?= h($get('site_email','hello@nexosdigital.com')) ?>">
+          <input type="text" name="site_email" value="<?= h($get('site_email','info@nexosdigitalagency.com')) ?>">
         </div>
         <div class="form-group">
           <label>Phone Number</label>
-          <input type="text" name="site_phone" value="<?= h($get('site_phone')) ?>">
+          <input type="text" name="site_phone" value="<?= h($get('site_phone', '+92 322 431 3775')) ?>">
         </div>
       </div>
       <div class="form-group">
@@ -116,7 +116,7 @@ require 'partials/layout_head.php';
       <?php foreach(['site_name','site_tagline','site_email','site_phone','site_address','footer_desc','meta_description','google_analytics'] as $k): ?>
         <input type="hidden" name="<?= $k ?>" value="<?= h($get($k)) ?>">
       <?php endforeach; ?>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="two-col">
         <div class="form-group">
           <label>Twitter / X URL</label>
           <input type="text" name="twitter_url" value="<?= h($get('twitter_url')) ?>" placeholder="https://twitter.com/nexos">
@@ -148,7 +148,7 @@ require 'partials/layout_head.php';
         <label>Current Password</label>
         <input type="password" name="current_password" autocomplete="current-password">
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="two-col">
         <div class="form-group">
           <label>New Password</label>
           <input type="password" name="new_password" autocomplete="new-password">
@@ -167,7 +167,7 @@ require 'partials/layout_head.php';
     <div style="font-size:12px;color:var(--sub);line-height:1.75">
       <strong style="color:var(--text);font-family:var(--font-h)">Default Admin Credentials</strong><br>
       Email: <code>admin@nexosdigital.com</code> · Password: <code>admin123</code><br>
-      <span style="color:#ff5555">⚠️ Change your password immediately after first login.</span>
+      <span style="color:var(--red)">⚠️ Change your password immediately after first login.</span>
     </div>
   </div>
 

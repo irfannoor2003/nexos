@@ -1,17 +1,17 @@
 <?php
-// ── Database Configuration ──
+// ── Database Configuration (Live / Hostinger) ──
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'nexos');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
+// ── Local (Laragon) — switch to this for development ──
 /*
-// ── Live (Hostinger) ──
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'u211813870_nexos_digital');
-define('DB_USER', 'u211813870_nexos_digital');
-define('DB_PASS', 'U211813870_nexo1');
+define('DB_NAME', 'nexos');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 */
 
