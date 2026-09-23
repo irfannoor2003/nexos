@@ -55,6 +55,16 @@ function nexus_image_slots(): array {
         ['port_grid_5', 'Portfolio Grid 5', '/assets/images/svc-ai.jpg', 'Portfolio'],
         ['port_grid_6', 'Portfolio Grid 6', '/assets/images/svc-social.jpg', 'Portfolio'],
 
+        // Service Detail CTA backgrounds
+        ['svc_seo_cta', 'SEO Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_ads_cta', 'Digital Ads Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_ecom_cta', 'E-Commerce Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_web_cta', 'Web Design Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_perf_cta', 'Performance Marketing Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_ai_cta', 'AI Automation Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_brand_cta', 'Branding Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+        ['svc_marketing_cta', 'Digital Marketing Detail CTA Background', '/assets/images/cta-work.jpg', 'Services'],
+
         // Contact
         ['contact_office', 'Office Image', '/assets/images/contact-office.jpg', 'Contact'],
     ];

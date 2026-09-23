@@ -55,9 +55,13 @@ include __DIR__ . '/includes/header.php';
   .faq-item:first-child{border-top:none}
   .faq-item h4{font-size:18px;margin-bottom:8px}
   .faq-item p{color:var(--sub);line-height:1.7}
-  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02));text-align:center;position:relative;overflow:hidden}
-  .cta-panel::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%)}
+  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:var(--cta-bg, linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02))) center/cover no-repeat;text-align:center;position:relative;overflow:hidden}
+  .cta-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(5,5,8,.9) 0%, rgba(5,5,8,.55) 40%, rgba(5,5,8,.3) 70%);z-index:0}
+  [data-theme="light"] .cta-panel::before{background:linear-gradient(to top, rgba(255,255,255,.95) 0%, rgba(255,255,255,.6) 40%, rgba(255,255,255,.3) 70%)}
+  .cta-panel::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%);z-index:0}
   .cta-panel > *{position:relative;z-index:1}
+  .cta-panel .sec-label{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+  [data-theme="light"] .cta-panel .sec-label{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.6)}
   @keyframes floatCard {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
   @media(max-width:980px){
     .detail-hero,.detail-section{padding-left:24px;padding-right:24px}
@@ -82,7 +86,7 @@ include __DIR__ . '/includes/header.php';
             <span class="pill">UX/UI Design</span>
           </div>
         </div>
-        <div class="detail-media reveal-r">
+        <div class="detail-media">
           <div class="mini-orb"></div>
           <div class="svg-orbit" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M7 8h10M7 11h7"/></svg>
@@ -172,7 +176,7 @@ include __DIR__ . '/includes/header.php';
   </section>
 
   <section class="detail-section" style="background:var(--bg2)">
-    <div class="detail-inner cta-panel">
+    <div class="detail-inner cta-panel" style="--cta-bg:url('<?= site_img('svc_web_cta', '/assets/images/cta-work.jpg') ?>')">
       <div class="sec-label">Ready to build</div>
       <h2 class="sec-h" style="margin-bottom:12px;">Ready to build a <span class="em">stronger digital presence?</span></h2>
       <p class="lead" style="max-width:760px;margin:0 auto 26px;">Your website should work as hard as your business does. We build digital experiences designed to convert.</p>

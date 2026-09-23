@@ -67,9 +67,13 @@ include __DIR__ . '/includes/header.php';
   .process-card-icon svg{width:22px;height:22px;color:var(--blue2)}
   .process-card:hover .process-card-icon{background:rgba(21,101,255,.18);transform:scale(1.15) rotate(-6deg)}
   .service-item li::before{content:'✓';position:absolute;left:0;top:0;color:var(--blue2);font-weight:700;font-size:14px}
-  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02));text-align:center;position:relative;overflow:hidden}
-  .cta-panel::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%)}
+  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:var(--cta-bg, linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02))) center/cover no-repeat;text-align:center;position:relative;overflow:hidden}
+  .cta-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(5,5,8,.9) 0%, rgba(5,5,8,.55) 40%, rgba(5,5,8,.3) 70%);z-index:0}
+  [data-theme="light"] .cta-panel::before{background:linear-gradient(to top, rgba(255,255,255,.95) 0%, rgba(255,255,255,.6) 40%, rgba(255,255,255,.3) 70%)}
+  .cta-panel::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%);z-index:0}
   .cta-panel > *{position:relative;z-index:1}
+  .cta-panel .sec-label{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+  [data-theme="light"] .cta-panel .sec-label{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.6)}
   @keyframes floatCard {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
   @media(max-width:980px){
     .detail-hero,.detail-section{padding-left:24px;padding-right:24px}
@@ -93,7 +97,7 @@ include __DIR__ . '/includes/header.php';
             <div class="stat"><span class="kicker">Result</span><strong>Growth</strong></div>
           </div>
         </div>
-        <div class="detail-media reveal-r">
+        <div class="detail-media">
           <div class="mini-orb"></div>
           <img src="<?= site_img('svc_seo_detail', '/assets/images/svc-seo.jpg') ?>" alt="SEO strategy dashboard" loading="lazy">
           <div class="floating-panel">
@@ -182,7 +186,7 @@ include __DIR__ . '/includes/header.php';
   </section>
 
   <section class="detail-section" style="background:var(--bg2)">
-    <div class="detail-inner cta-panel">
+    <div class="detail-inner cta-panel" style="--cta-bg:url('<?= site_img('svc_seo_cta', '/assets/images/cta-work.jpg') ?>')">
       <div class="sec-label">Ready to rank</div>
       <h2 class="sec-h" style="margin-bottom:12px;">Ready to get found by <span class="em">the right buyers?</span></h2>
       <p class="lead" style="max-width:760px;margin:0 auto 26px;">Your next customer is already searching. We make sure your business shows up in the right place at the right time.</p>

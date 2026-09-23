@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 /* PARALLAX IMAGES & BOXES */
-gsap.utils.toArray('.detail-media, .detail-card, .port-home-img img, .blog-card-img img, .svc-tl-media img').forEach(function(el){
+gsap.utils.toArray('.detail-card, .port-home-img img, .blog-card-img img, .svc-tl-media img').forEach(function(el){
   gsap.to(el, {
     yPercent: 15,
     ease: 'none',
@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function(){
     gsap.fromTo('.mini-badge',{opacity:0,y:20},{opacity:1,y:0,duration:.7,ease:'power3.out',delay:.15});
     gsap.fromTo(detH1,{opacity:0,y:50},{opacity:1,y:0,duration:1,ease:'power4.out',delay:.25});
     gsap.fromTo('.detail-sub',{opacity:0,y:30},{opacity:1,y:0,duration:.8,ease:'power3.out',delay:.45});
-    gsap.from('.detail-media',{opacity:0,x:50,scale:.95,duration:1.1,ease:'power3.out',delay:.35,scrollTrigger:{trigger:'.detail-media',start:'top 85%'}});
+    gsap.from('.detail-media',{opacity:0,x:50,scale:.95,duration:1.1,ease:'power3.out',delay:.35});
   }
 
   ScrollTrigger.refresh();

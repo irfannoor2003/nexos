@@ -59,9 +59,13 @@ include __DIR__ . '/includes/header.php';
   .process-card .num{display:inline-flex;align-items:center;justify-content:center;min-width:48px;height:48px;border-radius:14px;background:rgba(21,101,255,.12);border:1px solid rgba(21,101,255,.2);font-size:18px;font-weight:700;margin-bottom:20px}
   .process-card h3{font-size:20px;margin-bottom:10px}
   .process-card p{color:var(--sub);line-height:1.7}
-  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02));text-align:center;position:relative;overflow:hidden}
-  .cta-panel::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%)}
+  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:var(--cta-bg, linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02))) center/cover no-repeat;text-align:center;position:relative;overflow:hidden}
+  .cta-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(5,5,8,.9) 0%, rgba(5,5,8,.55) 40%, rgba(5,5,8,.3) 70%);z-index:0}
+  [data-theme="light"] .cta-panel::before{background:linear-gradient(to top, rgba(255,255,255,.95) 0%, rgba(255,255,255,.6) 40%, rgba(255,255,255,.3) 70%)}
+  .cta-panel::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%);z-index:0}
   .cta-panel > *{position:relative;z-index:1}
+  .cta-panel .sec-label{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+  [data-theme="light"] .cta-panel .sec-label{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.6)}
   .process-card-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(21,101,255,.12);border:1px solid rgba(21,101,255,.2);margin-bottom:14px;transition:all .35s var(--spring)}
   .process-card-icon svg{width:22px;height:22px;color:var(--blue2)}
   .process-card:hover .process-card-icon{background:rgba(21,101,255,.18);transform:scale(1.15) rotate(-6deg)}
@@ -87,7 +91,7 @@ include __DIR__ . '/includes/header.php';
             <div class="stat"><span class="kicker">Goal</span><strong>Sales</strong></div>
           </div>
         </div>
-        <div class="detail-media reveal-r">
+        <div class="detail-media">
           <div class="mini-orb"></div>
           <div class="svg-orbit" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L6 6H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V8a2 2 0 00-2-2h-3l-3-4z" /><circle cx="12" cy="15" r="3.5"/></svg>
@@ -171,7 +175,7 @@ include __DIR__ . '/includes/header.php';
   </section>
 
   <section class="detail-section" style="background:var(--bg2)">
-    <div class="detail-inner cta-panel">
+    <div class="detail-inner cta-panel" style="--cta-bg:url('<?= site_img('svc_ecom_cta', '/assets/images/cta-work.jpg') ?>')">
       <div class="sec-label">Ready to sell smarter</div>
       <h2 class="sec-h" style="margin-bottom:12px;">Create an ecommerce experience that <span class="em">drives revenue.</span></h2>
       <p class="lead" style="max-width:760px;margin:0 auto 26px;">A well-built store does not just look good—it creates momentum, confidence, and repeat sales. We help you turn that into growth.</p>

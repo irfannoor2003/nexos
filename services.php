@@ -187,7 +187,7 @@ include __DIR__ . '/includes/header.php';
 
 <!-- SERVICES TIMELINE -->
 <section class="svc-timeline-sec" data-no-fade>
-  <div style="max-width:860px;margin:0 auto 0">
+  <div style="">
     <div class="sec-label reveal" data-delay="0" style="margin-bottom:18px">What We Do</div>
     <h2 class="sec-h reveal" data-delay="80" style="font-size:clamp(30px,4vw,52px);margin-bottom:14px">Seven Services, One <span class="em">Growth Engine</span></h2>
     <p class="sec-sub reveal" data-delay="160" style="font-size:15px;margin-bottom:56px">Each service is a lever. Pulled together, they compound into sustained, measurable growth for your business.</p>

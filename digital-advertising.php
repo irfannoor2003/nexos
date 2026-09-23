@@ -59,9 +59,13 @@ include __DIR__ . '/includes/header.php';
   .service-item .index{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:12px;background:rgba(21,101,255,.12);border:1px solid rgba(21,101,255,.2);font-size:14px;font-weight:700;margin-bottom:16px}
   .service-item h3{font-size:22px;margin-bottom:10px}
   .service-item p{color:var(--sub);line-height:1.7}
-  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02));text-align:center;position:relative;overflow:hidden}
-  .cta-panel::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%)}
+  .cta-panel{padding:70px 30px;border:1px solid var(--border);border-radius:28px;background:var(--cta-bg, linear-gradient(135deg,rgba(21,101,255,.1),rgba(255,255,255,.02))) center/cover no-repeat;text-align:center;position:relative;overflow:hidden}
+  .cta-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(5,5,8,.9) 0%, rgba(5,5,8,.55) 40%, rgba(5,5,8,.3) 70%);z-index:0}
+  [data-theme="light"] .cta-panel::before{background:linear-gradient(to top, rgba(255,255,255,.95) 0%, rgba(255,255,255,.6) 40%, rgba(255,255,255,.3) 70%)}
+  .cta-panel::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 20%,transparent 100%);z-index:0}
   .cta-panel > *{position:relative;z-index:1}
+  .cta-panel .sec-label{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+  [data-theme="light"] .cta-panel .sec-label{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.6)}
   @keyframes floatCard {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
   @media(max-width:980px){
     .detail-hero,.detail-section{padding-left:24px;padding-right:24px}
@@ -86,7 +90,7 @@ include __DIR__ . '/includes/header.php';
             <div class="detail-card"><h3>Analytics</h3><p>Track performance clearly and optimize every spend decision.</p></div>
           </div>
         </div>
-        <div class="detail-media reveal-r">
+        <div class="detail-media">
           <div class="mini-orb"></div>
           <img src="<?= site_img('svc_ads_detail', '/assets/images/svc-ads.jpg') ?>" alt="Ad campaign performance" loading="lazy">
           <div class="floating-panel">
@@ -144,7 +148,7 @@ include __DIR__ . '/includes/header.php';
   </section>
 
   <section class="detail-section">
-    <div class="detail-inner cta-panel">
+    <div class="detail-inner cta-panel" style="--cta-bg:url('<?= site_img('svc_ads_cta', '/assets/images/cta-work.jpg') ?>')">
       <div class="sec-label">Ready to scale</div>
       <h2 class="sec-h" style="margin-bottom:12px;">Your next campaign should <span class="em">convert, not just click.</span></h2>
       <p class="lead" style="max-width:760px;margin:0 auto 26px;">We build ad systems that attract the right people, reduce wasted spend, and turn attention into demand.</p>
